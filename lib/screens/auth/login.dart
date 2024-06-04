@@ -20,7 +20,7 @@ class _LoginState extends State<Login> {
   GlobalKey<FormState> formKey=GlobalKey<FormState>();
 
   Future submit()async{
-     Navigator.pushReplacementNamed(context, "/home");
+    Navigator.pushReplacementNamed(context, "/home");
     if(! formKey.currentState!.validate()){
       return;
     }
@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() => loading=true );
     await ApiRequests.postRequest(route: "/login", body:data).then((response) {
-      print(response.body);
+      // print(response.body);
       if(response.statusCode==200){
         showSnackbar(context, message:"login success ....!");
         var result=jsonDecode(response.body);
@@ -100,11 +100,6 @@ class _LoginState extends State<Login> {
             ],
           ),
         ),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        child: Icon(Icons.add),
       ),
     );
   }
