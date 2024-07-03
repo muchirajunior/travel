@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() => loading=true );
     await ApiRequests.postRequest(route: "/login", body:data).then((response) {
-      print(response.body);
+      // print(response.body);
       if(response.statusCode==200){
         showSnackbar(context, message:"login success ....!");
         var result=jsonDecode(response.body);

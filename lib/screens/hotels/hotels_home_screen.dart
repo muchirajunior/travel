@@ -16,17 +16,17 @@ class _HotelsHomeScreenState extends State<HotelsHomeScreen> {
   Hotel(
     name: 'Hotel One',
     address: '123 Main Street',
-    imageUrl: 'https://media.cntraveler.com/photos/64c284eef3e99758036e92c4/master/w_1920%2Cc_limit/raffles_royal_residence__aerial_view-jan21-pr.jpg',
+    village: 'https://media.cntraveler.com/photos/64c284eef3e99758036e92c4/master/w_1920%2Cc_limit/raffles_royal_residence__aerial_view-jan21-pr.jpg',
   ),
   Hotel(
     name: 'Hotel Two',
     address: '456 Elm Street',
-    imageUrl: 'https://media.cntraveler.com/photos/64c284ed3f4044d4db574b14/master/w_1920%2Cc_limit/Emerald%2520Resort%2520&%2520Spa-jan23-pr-global23.jpg.jpg',
+    village: 'https://media.cntraveler.com/photos/64c284ed3f4044d4db574b14/master/w_1920%2Cc_limit/Emerald%2520Resort%2520&%2520Spa-jan23-pr-global23.jpg.jpg',
   ),
   Hotel(
     name: 'Hotel Three',
     address: '789 Oak Street',
-    imageUrl: 'https://media.cntraveler.com/photos/64c284eb9b31895c2ec86d1a/master/w_1920%2Cc_limit/Emerald%2520Faarufushi%2520Resort%2520&%2520Spa-jan23-pr-global23.jpg',
+    village: 'https://media.cntraveler.com/photos/64c284eb9b31895c2ec86d1a/master/w_1920%2Cc_limit/Emerald%2520Faarufushi%2520Resort%2520&%2520Spa-jan23-pr-global23.jpg',
   ),
 ];
 
@@ -131,10 +131,10 @@ List<Cartegory> cartegories = [
                 clipBehavior: Clip.hardEdge,
                 child: Column(
                   children: [
-                    Image.network(hotel.imageUrl, height: 150, width: double.infinity, fit: BoxFit.cover,),
+                    Image.network(hotel.village.toString(), height: 150, width: double.infinity, fit: BoxFit.cover,),
                     ListTile(
-                      title: Text(hotel.name),
-                      subtitle: Text(hotel.address),
+                      title: Text(hotel.name.toString()),
+                      subtitle: Text(hotel.address.toString()),
                       onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (_)=>HotelScreen(hotel: hotel))),
                       trailing:  SizedBox(
                         width: 100,

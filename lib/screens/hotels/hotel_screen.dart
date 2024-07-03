@@ -14,15 +14,15 @@ class _HotelScreenState extends State<HotelScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.hotel.name),
+        title: Text(widget.hotel.name.toString()),
       ),
 
       body: Column(
         children: [
-          Image.network(widget.hotel.imageUrl),
+          Image.network(widget.hotel.mediaImages.first.fileName.toString()),
           ListTile(
             leading: const Icon(Icons.location_on_outlined),
-            title: Text(widget.hotel.address),
+            title: Text(widget.hotel.address.toString()),
              trailing: const SizedBox(
                 width: 100,
                 child:  Row(
