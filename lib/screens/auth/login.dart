@@ -20,7 +20,6 @@ class _LoginState extends State<Login> {
   GlobalKey<FormState> formKey=GlobalKey<FormState>();
 
   Future submit()async{
-    Navigator.pushReplacementNamed(context, "/home");
     if(! formKey.currentState!.validate()){
       return;
     }
@@ -28,7 +27,7 @@ class _LoginState extends State<Login> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() => loading=true );
     await ApiRequests.postRequest(route: "/login", body:data).then((response) {
-      // print(response.body);
+      print(response.body);
       if(response.statusCode==200){
         showSnackbar(context, message:"login success ....!");
         var result=jsonDecode(response.body);
@@ -58,17 +57,17 @@ class _LoginState extends State<Login> {
                 children: [
                   const Text.rich(
                     TextSpan(
-                      text: '\nWelcome back\n\n', 
+                      text: '\nWelcome back\n', 
                       style: TextStyle(fontSize: 23),
                       children: [
                         TextSpan(
-                          text: 'Login to contnue with the app',
+                          text: 'Login to contnue with the app\n\n',
                           style: TextStyle(fontSize: 14)
                         )
                       ]
                     ),
                   ),
-                  Image.asset('assets/user.png', width: 110,)
+                  Image.asset('assets/images/user.png', width: 110,)
                 ],
               ),
               const SizedBox(height: 40,),

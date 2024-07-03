@@ -2,31 +2,34 @@ import 'package:flutter/material.dart';
 
 class CustomSearchInput extends StatelessWidget {
   final TextEditingController controller;
-  final Function onChange;
-  final bool showClearIcon;
-  const CustomSearchInput({Key? key,required this.controller,required this.onChange,this.showClearIcon=false}) : super(key: key);
+  final Function(String)? onChange;
+  final Function()? filter;
+  const CustomSearchInput({super.key,required this.controller,this.onChange,this.filter});
  
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-            margin: const EdgeInsets.fromLTRB(5,5,5,8),
-            child: TextFormField(
-              controller: controller,
-              onChanged: (_)=>onChange(),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: showClearIcon ? IconButton(
-                  onPressed: (){
-                    controller.clear();
-                    onChange();
-                  }, 
-                  icon:const  Icon(Icons.clear)) : const SizedBox(),
-                hintText: "search ...."
-              ),
-            ),
-          );
+    return  Card(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10)
+      ),
+      clipBehavior: Clip.hardEdge,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: TextFormField(
+          controller: controller,
+          onChanged: onChange,
+          decoration:  InputDecoration(
+            border: InputBorder.none,
+            enabledBorder: InputBorder.none,
+            focusedBorder: InputBorder.none,
+            prefixIcon: const Icon(Icons.search),
+            hintText: 'Search ..',
+            suffixIcon:IconButton(onPressed: filter, icon: const Icon(Icons.tune))
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: double.infinity,
         decoration:  BoxDecoration(
           image: DecorationImage(
-            image: AssetImage( Theme.of(context).brightness == Brightness.light ?  'assets/splash.png':'assets/splash_dark.png'), 
+            image: AssetImage( Theme.of(context).brightness == Brightness.light ?  'assets/images/splash_light.png':'assets/images/splash_dark.png'), 
             fit: BoxFit.cover
           )
         ),

@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class ApiRequests{
 
-  static String baseURL="https://dev.travel.co/api/v1";
+  static String baseURL="http://test.moonrisehaven.co.ke/api";
 
   static Future<bool> isConnectedToNetwork()async{
     var connectivity = await Connectivity().checkConnectivity();

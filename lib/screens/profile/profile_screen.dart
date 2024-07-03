@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:travel/models/user.dart';
 import 'package:travel/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +41,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text("Profile",style: TextStyle(fontWeight: FontWeight.bold),)),
-        elevation: 1,
+        centerTitle: true,
+        title: Text(
+          "My Profile",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).brightness == Brightness.light ? Theme.of(context).primaryColor : Colors.grey.shade200
+          ),
+        ),
+        scrolledUnderElevation: 0,
         actions:const [
          SizedBox(width: 50,)
         ],
@@ -51,15 +59,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           const SizedBox(height: 20,),
 
-          Center(
-            child: Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100)
-              ),
-              clipBehavior: Clip.hardEdge,
-              child: Image.asset('assets/profile.png', fit: BoxFit.cover,),
+         const Center(
+            child: CircleAvatar(
+             radius: 60,
+             
+              backgroundImage: AssetImage('assets/icons/profile.png',),
             ),
           ),
          

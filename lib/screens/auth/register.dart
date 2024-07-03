@@ -82,17 +82,17 @@ class _RegisterState extends State<Register> {
                 children: [
                   const Text.rich(
                     TextSpan(
-                      text: '\nWelcome here\n\n', 
+                      text: '\nWelcome here\n', 
                       style: TextStyle(fontSize: 23),
                       children: [
                         TextSpan(
-                          text: 'Register your account to get started',
+                          text: 'Register your account to get started\n\n',
                           style: TextStyle(fontSize: 14)
                         )
                       ]
                     ),
                   ),
-                  Image.asset('assets/user.png', width: 120,)
+                  Image.asset('assets/images/user.png', width: 120,)
                 ],
               ),
               const SizedBox(height:30,),
