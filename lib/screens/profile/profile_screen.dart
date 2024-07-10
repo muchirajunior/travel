@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:travel/models/user.dart';
 import 'package:travel/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   User? user;
   getUser()async{
-    user=await getLocalUser();
+    user=await Utils.getLocalUser();
     setState(() {});
   }
 
@@ -32,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       actionsAlignment: MainAxisAlignment.spaceBetween,
       actions: [
         ElevatedButton(onPressed: ()=> Navigator.pop(context), child: const Text("cancel")),
-        ElevatedButton(onPressed: ()=> logout(context), child: const Text("Ok"))
+        ElevatedButton(onPressed: ()=> Utils.logout(context), child: const Text("Ok"))
       ],
     ));
   }
