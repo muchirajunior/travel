@@ -19,7 +19,7 @@ class _HotelScreenState extends State<HotelScreen> {
 
       body: Column(
         children: [
-          Image.network(widget.hotel.mediaImages.first.fileName.toString()),
+          Image.network('https://media.cntraveler.com/photos/64c284eef3e99758036e92c4/master/w_1920%2Cc_limit/raffles_royal_residence__aerial_view-jan21-pr.jpg'),
           ListTile(
             leading: const Icon(Icons.location_on_outlined),
             title: Text(widget.hotel.address.toString()),

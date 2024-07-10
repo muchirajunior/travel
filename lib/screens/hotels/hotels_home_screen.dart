@@ -21,6 +21,7 @@ class _HotelsHomeScreenState extends State<HotelsHomeScreen> {
   
 
   getData({bool refresh = false})async{
+    if(!refresh && HotelsService.hotels.value.isNotEmpty){return;}
     setState(()=> loading= !refresh);
     await HotelsService.fetchHotels();
     setState(()=> loading= false);
