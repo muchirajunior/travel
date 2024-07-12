@@ -27,16 +27,17 @@ class _LoginState extends State<Login> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() => loading=true );
     await ApiRequests.postRequest(route: "/login", body:data).then((response) {
+      var result=jsonDecode(response.body);
       // print(response.body);
       if(response.statusCode==200){
-        showSnackbar(context, message:"login success ....!");
-        var result=jsonDecode(response.body);
+        CustomSnackbar( message:"Login success ....!");
+        
         preferences.setString("token", result['access_token']);
         preferences.setString("user", jsonEncode(result['user']));
         Navigator.pushReplacementNamed(context, "/home");
       }else{
         var result=jsonDecode(response.body);
-        showSnackbar(context, message: result['message']);
+        CustomSnackbar( message: result['message']);
       }     
     });
     setState(() => loading=false );
