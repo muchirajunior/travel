@@ -46,7 +46,9 @@ class _CreateReservationSheetState extends State<CreateReservationSheet> {
         "dateTo" : endController.text,
         "createdBy" : "1"
     });
-    print(res);
+    if(res){
+      Navigator.pop(context);
+    }
     setState(() => loading = false);
   }
 

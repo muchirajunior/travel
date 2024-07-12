@@ -89,7 +89,7 @@ class _HotelScreenState extends State<HotelScreen> {
                   width: 150,
                   child: FilledButton(
                     onPressed: ()=>showModalBottomSheet(context: context, showDragHandle: true, builder: (_)=>CreateReservationSheet(hotel: widget.hotel)),
-                    child: const Text("Visit Site")
+                    child: const Text("Make Reservation")
                   )
                 )
               ],
