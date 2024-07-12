@@ -147,12 +147,17 @@ class _HotelsHomeScreenState extends State<HotelsHomeScreen> {
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_)=>HotelScreen(hotel: hotel))),
                     child: Card(
                       clipBehavior: Clip.hardEdge,
+                      surfaceTintColor: Colors.amber,
+                      elevation: 4,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Stack(
                             children: [
-                              Image.network( !loading ?  placeholder : "${ApiRequests.baseURL}/${hotel.mediaImages.first.fileName}"),
+                              Card(
+                                clipBehavior: Clip.hardEdge,
+                                child: Image.network( !loading ?  placeholder : "${ApiRequests.baseURL}/${hotel.mediaImages.first.fileName}")
+                              ),
                               Positioned(
                                 right: 10,
                                 bottom: 5,

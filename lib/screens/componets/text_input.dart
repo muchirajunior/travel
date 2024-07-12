@@ -7,7 +7,19 @@ class CustomTextInput extends StatefulWidget {
   final Icon? icon;
   final TextInputType inputType;
   final bool required;
-  const CustomTextInput({super.key, required this.controller,required this.title,this.isPassword=false,this.icon, this.inputType=TextInputType.text,this.required=true});
+  final bool readonly;
+  final Widget? suffix;
+  const CustomTextInput({
+    super.key, 
+    required this.controller,
+    required this.title,
+    this.isPassword=false,
+    this.icon, 
+    this.inputType=TextInputType.text,
+    this.required=true,
+    this.readonly=false,
+    this.suffix
+  });
 
   @override
   State<CustomTextInput> createState() => _CustomTextInputState();
@@ -30,14 +42,15 @@ class _CustomTextInputState extends State<CustomTextInput> {
         controller: widget.controller,
         keyboardType: widget.inputType,
         obscureText: hidePass,
+        readOnly: widget.readonly,
         decoration: InputDecoration(
           labelText: widget.title.toUpperCase(),
-          prefixIcon: widget.icon ?? const SizedBox( width: 0,),
+          prefixIcon: widget.icon,
           contentPadding: const EdgeInsets.all(15),
           suffixIcon: widget.isPassword ? IconButton(
             onPressed: ()=>setState(()=> hidePass = !hidePass ),
              icon: hidePass ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility) 
-          ) :const SizedBox(),
+          ) : widget.suffix ,
           hintText: "enter ${widget.title}",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10)

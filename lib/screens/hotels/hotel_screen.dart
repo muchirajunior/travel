@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:travel/models/hotel.dart';
+import 'package:travel/screens/componets/custom_chip.dart';
+import 'package:travel/screens/reservations/create_reservation_sheet.dart';
 
 class HotelScreen extends StatefulWidget {
   final Hotel hotel;
@@ -10,6 +13,7 @@ class HotelScreen extends StatefulWidget {
 }
 
 class _HotelScreenState extends State<HotelScreen> {
+  final String placeholdeImage = 'https://media.cntraveler.com/photos/64c284eef3e99758036e92c4/master/w_1920%2Cc_limit/raffles_royal_residence__aerial_view-jan21-pr.jpg';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,44 +23,75 @@ class _HotelScreenState extends State<HotelScreen> {
 
       body: Column(
         children: [
-          Image.network('https://media.cntraveler.com/photos/64c284eef3e99758036e92c4/master/w_1920%2Cc_limit/raffles_royal_residence__aerial_view-jan21-pr.jpg'),
+          Stack(
+            children: [
+              Image.network(placeholdeImage, height: 300,fit: BoxFit.cover,),
+              Positioned(
+                right: 10,
+                child: SizedBox(
+                  height: 300,
+                  width: 60,
+                  child: ListView(
+                    children: widget.hotel.mediaImages.map((image) => SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: Card(
+                        clipBehavior: Clip.hardEdge,
+                        child:  Image.network(placeholdeImage,fit:BoxFit.cover ,)
+                      ),
+                    )).toList(),
+                  ),
+                )
+              )
+            ],
+          ),
           ListTile(
-            leading: const Icon(Icons.location_on_outlined),
+            leading: const Icon(Icons.location_on_outlined, size: 30,),
             title: Text(widget.hotel.address.toString()),
-             trailing: const SizedBox(
+            subtitle: Text("${widget.hotel.location ?? widget.hotel.constituency}, ${widget.hotel.country ?? widget.hotel.state}"),
+             trailing:  SizedBox(
                 width: 100,
                 child:  Row(
-                  children: [
-                    Icon(Icons.star, color: Colors.amber, size: 20,),
-                    Icon(Icons.star, color: Colors.amber, size: 20,),
-                    Icon(Icons.star, color: Colors.amber, size: 20,),
-                    Icon(Icons.star, color: Colors.amber, size: 20,),
-                    Icon(Icons.star, color: Colors.amber, size: 20,),
-                  ],
+                  children: List.generate(4, (index) => const Icon(Icons.star, color: Colors.amber, size: 20,))
+                    
                 ),
               ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text("Our contemporary resort is a tropical wonderland, located just a 40 minutes speedboat ride from Velana International Airport Malé. Featuring world-class diving sites and surfing on our doorstep, our spacious villas are dotted around the island and appeal to a wide variety of guests, offering access to the beach, ocean or lagoon. For families, the two- and three-bedroom villas offer ample space for fun and relaxation as you discover Kandooma. Parents can introduce the kids to the thrill of island life through activities such as PADI Bubblemaker, Surf Camps, swimming lessons, and best of all, the Kandoo Kids' Club with a daily activities plan. Along with Holiday Inn®'s Kids Stay and Eat Free programme, we provide a tropical adventure that the family will always"),
-            ),
 
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              children: [
+                Wrap(
+                  children: [
+                    CustomChip(label:"⭐ ${ widget.hotel.classification ?? 'Unrated'}"),
+                    CustomChip(label:"💒 ${ widget.hotel.town ?? widget.hotel.street}"),
+                    CustomChip(label:"📬 ${ widget.hotel.zipcode ?? 'No ZipCode'}"),
+                  ],
+                ),
+                const SizedBox(height: 10,),
+                Text(widget.hotel.description ?? '')
+              ],
+            ),
           ),
+          
 
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Row(
               children: [
                 SizedBox(
                   width: 150 ,
-                  child: OutlinedButton(onPressed: (){}, child: Text("\$800/person"))
+                  child: OutlinedButton(onPressed: (){}, child: const Text("\$800/person"))
                 ),
-                Spacer(),
+                const Spacer(),
                 SizedBox(
                   width: 150,
-                  child: FilledButton(onPressed: (){}, child: Text("Visit Site"))
+                  child: FilledButton(
+                    onPressed: ()=>showModalBottomSheet(context: context, showDragHandle: true, builder: (_)=>CreateReservationSheet(hotel: widget.hotel)),
+                    child: const Text("Visit Site")
                   )
+                )
               ],
             ),
           )
