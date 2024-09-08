@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart';
@@ -21,7 +22,7 @@ class ApiRequests{
 
   static Future<Response> getRequest({required String route})async{
     if(! await isConnectedToNetwork()){
-      return Response(jsonEncode({'message':"network error,please check your internet connection."}), 400);
+      return Response(jsonEncode({'message':"Network error,please check your internet connection."}), 400);
     }
     SharedPreferences preferences= await SharedPreferences.getInstance();
     var token= preferences.getString('token');
@@ -32,15 +33,15 @@ class ApiRequests{
       }
     );
     if(response.body.contains('DOCTYPE html')){
-      print(response.body);
-      return Response(jsonEncode({'message':"a server error occurred..!"}), response.statusCode);
+      log(response.body);
+      return Response(jsonEncode({'message':"A server error occurred..!"}), response.statusCode);
     }
     return response;
   }
 
   static Future<Response> postRequest({required String route,required Map body})async{
     if(! await isConnectedToNetwork()){
-      return Response(jsonEncode({'message':"network error,please check your internet connection."}), 400);
+      return Response(jsonEncode({'message':"Network error,please check your internet connection."}), 400);
     }
     SharedPreferences preferences= await SharedPreferences.getInstance();
     var token= preferences.getString('token');
@@ -54,15 +55,15 @@ class ApiRequests{
       body: jsonEncode(body)
     );
      if(response.body.contains('DOCTYPE html')){
-      print(response.body);
-      return Response(jsonEncode({'message':"a server error occurred..!"}), response.statusCode);
+      log(response.body);
+      return Response(jsonEncode({'message':"A server error occurred..!"}), response.statusCode);
     }
     return response;
   }
 
   static Future<Response> putRequest({required String route,required Map body})async{
     if(! await isConnectedToNetwork()){
-      return Response(jsonEncode({'message':"network error,please check your internet connection."}), 400);
+      return Response(jsonEncode({'message':"Network error,please check your internet connection."}), 400);
     }
     SharedPreferences preferences= await SharedPreferences.getInstance();
     var token= preferences.getString('token');
@@ -76,15 +77,15 @@ class ApiRequests{
       body: jsonEncode(body)
     );
      if(response.body.contains('DOCTYPE html')){
-      print(response.body);
-      return Response(jsonEncode({'message':"a server error occurred..!"}), response.statusCode);
+      log(response.body);
+      return Response(jsonEncode({'message':"A server error occurred..!"}), response.statusCode);
     }
     return response;
   }
 
    static Future<Response> deleteRequest({required String route})async{
     if(! await isConnectedToNetwork()){
-      return Response(jsonEncode({'message':"network error,please check your internet connection."}), 400);
+      return Response(jsonEncode({'message':"Network error,please check your internet connection."}), 400);
     }
     SharedPreferences preferences= await SharedPreferences.getInstance();
     var token= preferences.getString('token');
@@ -95,8 +96,8 @@ class ApiRequests{
       }
     );
    if(response.body.contains('DOCTYPE html')){
-      print(response.body);
-      return Response(jsonEncode({'message':"a server error occurred..!"}), response.statusCode);
+      log(response.body);
+      return Response(jsonEncode({'message':"A server error occurred..!"}), response.statusCode);
     }
     return response;
   }
